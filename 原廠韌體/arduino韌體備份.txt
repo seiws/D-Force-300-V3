@@ -1,0 +1,47 @@
+將韌體讀出寫入檔案
+avrdude  -C  /etc/avrdude.conf  -p m2560 -c wiring -P /dev/ttyUSB0 -b 115200 -U flash:r:flash_backup_file.hex:i
+
+將eeprom記憶體讀出寫入檔案
+avrdude -C  /etc/avrdude.conf -p m2560 -c wiring -P /dev/ttyUSB0 -b 115200 -U eeprom:r:eeprom_backup_file.hex:i
+
+
+將韌體檔寫入主板
+avrdude  -D -C  /etc/avrdude.conf  -p m2560 -c wiring -P /dev/ttyUSB0 -b 115200 -U flash:w:flash_backup_file.hex:i
+
+將eeprom_backup_file.hex檔案寫入 arduino eeprom
+avrdude -C  /etc/avrdude.conf -p m2560 -c wiring -P /dev/ttyUSB0 -b 115200 -U eeprom:w:eeprom_backup_file.hex:i
+
+參考資料
+http://www.ladyada.net/learn/avr/avrdude.html
+
+用法：avrdude [選項]
+選項：
+  -p <partno> 必需。指定 AVR 設備。
+  -b <baudrate> 覆蓋 RS-232 波特率。
+  -B <bitclock> 指定 JTAG/STK500v2 位時鐘週期（us）。
+  -C <config-file> 指定配置文件的位置。
+  -c <programmer> 指定程序員類型。
+  -D 禁用閃存的自動擦除
+  -i <delay> ISP 時鐘延遲 [以微秒為單位]
+  -P <端口> 指定連接端口。
+  -F 覆蓋無效簽名檢查。
+  -e 執行芯片擦除。
+  -O 執行 RC 振盪器校準（參見 AVR053）。
+  -U <內存類型>:r|w|v:<文件名>[:格式]
+                             內存操作規範。
+                             允許多個 -U 選項，每個請求
+                             按指定的順序執行。
+  -n 不要向設備寫入任何內容。
+  -V 不驗證。
+  -u 禁用安全模式，從腳本運行時默認。
+  -s 靜默安全模式操作，不會詢問你是否
+                             保險絲應該換回來。
+  -t 進入終端模式。
+  -E <exitspec>[,<exitspec>] 列出程序員退出規範。
+  -x <extended_pa​​ram> 將 <extended_pa​​ram> 傳遞給程序員。
+  -y 計數 EEPROM 中的擦除次數。
+  -Y <number> 在 EEPROM 中初始化擦除週期#。
+  -v 詳細輸出。 -v -v 更多。
+  -q 停止進度輸出。 -q -q 少。
+  -l logfile 使用 logfile 而不是 stderr 進行診斷。
+  -？顯示此用法。
